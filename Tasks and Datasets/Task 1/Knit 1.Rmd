@@ -1,0 +1,73 @@
+---
+title: '"OEL"'
+author: "Ahad F23607034"
+date: "2025-03-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# Load the dataset from the given file path
+```{r}
+
+data <- read.csv("C:/Users/Student/Desktop/OEL DATASETS PFAI/Task 1/WHR2024.csv")
+
+```
+2. Display the first 5 rows
+```{r}
+# Display the first 5 rows of the dataset
+head(data, 5)
+
+```
+3. Get basic summary statistics
+```{r}
+# Get summary statistics of the dataset
+summary(data)
+
+```
+4. Identify missing values
+```{r}
+# Check for missing values (NA) in the dataset
+colSums(is.na(data))
+
+```
+5. Save the cleaned dataset as cleaned_happiness.csv
+```{r}
+# Clean the dataset by removing rows with any missing values
+cleaned_data <- na.omit(data)
+
+# Define the output file path
+output_path <- "C:/Users/Student/Desktop/OEL DATASETS PFAI/Task 1/cleaned_happiness.csv"
+
+# Save the cleaned dataset
+write.csv(cleaned_data, output_path, row.names = FALSE)
+
+# Print confirmation message
+print(paste("Cleaned dataset saved at:", output_path))
+
+```
+head(cleaned_data, 5)
+
+

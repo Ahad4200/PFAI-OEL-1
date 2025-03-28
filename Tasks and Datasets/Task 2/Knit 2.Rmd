@@ -1,0 +1,45 @@
+---
+title: "Task 2 - Climate Change Data Analysis"
+author: "Ahad F23607034"
+date: "2025-03-26"
+output: html_document
+---
+
+# ✅ Load Required Libraries
+library(dplyr)
+library(ggplot2)
+
+# ✅ Load the Dataset (Ensure Correct File Path)
+data <- read.csv("C:/Users/Student/Desktop/OEL DATASETS PFAI/Task 2/GlobalTemperatures.csv", stringsAsFactors = FALSE)
+
+# ✅ Convert Date Column to Proper Date Format
+data$dt <- as.Date(data$dt, format="%Y-%m-%d")
+
+# ✅ Display First 5 Rows
+head(data, 5)
+
+# ✅ Check for Missing Values
+colSums(is.na(data))
+
+# ✅ Clean the Dataset (Remove NAs)
+cleaned_data <- na.omit(data)
+
+# ✅ Save Cleaned Dataset
+output_path <- "C:/Users/Student/Desktop/OEL DATASETS PFAI/Task 2/cleaned_climate_data.csv"
+write.csv(cleaned_data, output_path, row.names = FALSE)
+print(paste("Cleaned dataset saved at:", output_path))
+
+# ✅ Summary Statistics
+summary(cleaned_data)
+
+# ✅ 📊 Line Plot: Global Temperature Over Time (Fixed Date Issue)
+ggplot(cleaned_data, aes(x = dt, y = LandAverageTemperature)) +
+  geom_line(color = "blue") +
+  labs(title = "Global Average Temperature Over Time", x = "Year", y = "Temperature (Celsius)")
+
+# ✅ 📊 Scatter Plot: CO₂ Emissions vs. Temperature (If Available)
+if("CO2_Emissions" %in% colnames(cleaned_data)) {
+  ggplot(cleaned_data, aes(x = CO2_Emissions, y = LandAverageTemperature)) +
+    geom_point(color = "red", alpha = 0.6) +
+    labs(title = "CO₂ Emissions vs. Global Temperature", x = "CO₂ Emissions", y = "Temperature (Celsius)")
+}
